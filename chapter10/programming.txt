@@ -1,0 +1,4 @@
+I love programming!
+人生苦短，我用python!
+I also love finding meaningin large datasets.
+I love creating apps that can run in a browser.
