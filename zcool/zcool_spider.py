@@ -3,35 +3,35 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_all_items(url):
-    web_data = requests.get(url)
+def get_all_items(website):
+    web_data = requests.get(website)
     html = BeautifulSoup(web_data.text, "lxml")
     item_list_html = html.select("div.card-box")
-    item_list = []
+    picture_item_list = []
     for item_html in item_list_html:
         title_html = item_html.select("a.title-content")
         title = title_html[0].text
         url_html = item_html.select("a.title-content")
-        url = url_html[0].get("href")
-        item = {
-            "title":title,
-            "url":url
+        picture_url = url_html[0].get("href")
+        picture = {
+            "title": title,
+            "url": picture_url
         }
-        if "work" in item["url"]:
-            item_list.append(item)
-    return item_list
+        if "work" in picture["url"]:
+            picture_item_list.append(picture)
+    return picture_item_list
 
 
-def get_item_detail(url, title):
+def get_item_detail(picture_url, title):
     # 创建以标题命名的文件夹
     if not os.path.exists(title):
         os.mkdir(title)
     directory = os.getcwd() + "\\" + title
-    web_data = requests.get(url)
+    web_data = requests.get(picture_url)
     html = BeautifulSoup(web_data.text, "lxml")
     image_list_html = html.select("div.reveal-work-wrap > img")
     for image_html in image_list_html:
-        image_link = image_html.get("src").replace("128w","1280w")
+        image_link = image_html.get("src").replace("128w", "1280w")
         print(image_link)
         download_image(image_link, directory)
 
@@ -52,4 +52,3 @@ for item in item_list:
     if "红头发女孩" in item["title"]:
         continue
     get_item_detail(item["url"], item["title"])
-

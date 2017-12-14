@@ -19,6 +19,5 @@ for alien in aliens[0:3]:
         alien['color'] = 'yellow'
         alien['speed'] = 'medium'
         alien['points'] = 10
-    elif alien['color'] == 'yellow':
 for alien in aliens[0:5]:
     print(alien)

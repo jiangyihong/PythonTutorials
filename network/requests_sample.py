@@ -31,12 +31,11 @@ def get_job_list(page):
     print("完成第" + str(page) + "页数据提取")
     return web_data.text
 
+
 for page in range(1, 31):
     job_list = get_job_list(page)
     file_name = "job_list_" + str(page) + ".json"
-    with open(file_name,"w",encoding="utf8") as file_object:
+    with open(file_name, "w", encoding="utf8") as file_object:
         file_object.writelines(job_list)
     time.sleep(3)
 print("获取数据完毕")
-
-
