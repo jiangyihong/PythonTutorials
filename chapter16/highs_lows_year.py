@@ -1,9 +1,10 @@
 import csv
+from matplotlib import pyplot as plt
 from datetime import datetime
 
-from matplotlib import pyplot as plt
 
-filename = "sitka_weather_07-2014.csv"
+# 读取CSV文件
+filename = "sitka_weather_2014.csv"
 with open(filename) as file_object:
     reader = csv.reader(file_object)
     header_row = next(reader)
@@ -15,12 +16,14 @@ with open(filename) as file_object:
 
         high = int(row[1])
         highs.append(high)
+
 # 数据可视化
-fig = plt.figure(figsize=(10, 5))
+fig = plt.figure(dpi=128, figsize=(10, 5))
 plt.plot(dates, highs, c="red")
-plt.title("Daily high temperatures, July 2014", fontsize=24)
+plt.title("Daily high temperatures - 2014", fontsize=24)
 plt.xlabel("", fontsize=24)
 fig.autofmt_xdate()
 plt.ylabel("Temperature(F)", fontsize=16)
 plt.tick_params(axis="both", which="major", labelsize=16)
 plt.show()
+
